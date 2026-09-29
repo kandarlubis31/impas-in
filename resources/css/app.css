@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+/* Pagination: dashboard memakai ->links() (paginate) → hanya view tailwind.blade.php yang dirender.
+   View lain (bootstrap-4/5, semantic-ui, simple-*) tidak pernah dipakai — di-scan supaya class-nya
+   (dark:, gray-*, blue-*, d-flex, dll) tidak mengotori bundle CSS. Kalau nanti pakai simplePaginate,
+   tambahkan simple-tailwind.blade.php ke sini. */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/tailwind.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Brand color: warm teal (primary) — konsisten di semua halaman */
+    --color-primary-50: #effdf7;
+    --color-primary-100: #d9f9ec;
+    --color-primary-200: #b5f1da;
+    --color-primary-300: #7ee4c2;
+    --color-primary-400: #41cfa3;
+    --color-primary-500: #1ab487;
+    --color-primary-600: #0f926e;
+    --color-primary-700: #0e755b;
+    --color-primary-800: #0e5d4a;
+    --color-primary-900: #0c4c3e;
+    --color-primary-950: #062b22;
+
+    --shadow-soft: 0 10px 40px -12px rgba(15, 146, 110, 0.18);
+    --shadow-lift: 0 20px 50px -20px rgba(6, 43, 34, 0.35);
+}
+
+/* ============ Animasi scroll ringan (pengganti AOS, tanpa CDN) ============
+   Observer mini di app.js menambah .aos-init lalu .aos-animate saat elemen masuk viewport.
+   Anti-fail: tanpa .aos-init (JS mati), elemen selalu terlihat penuh. */
+[data-aos]:not(.aos-init) {
+    opacity: 1;
+    transform: none;
+}
+.aos-init:not(.aos-animate) {
+    opacity: 0;
+}
+
+@keyframes aos-fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes aos-fade-down {
+    from { opacity: 0; transform: translateY(-24px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes aos-fade-left {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes aos-fade-right {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes aos-zoom-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: none; }
+}
+.aos-animate[data-aos="fade-up"]    { animation: aos-fade-up 0.7s ease-out both; }
+.aos-animate[data-aos="fade-down"]  { animation: aos-fade-down 0.7s ease-out both; }
+.aos-animate[data-aos="fade-left"]  { animation: aos-fade-left 0.7s ease-out both; }
+.aos-animate[data-aos="fade-right"] { animation: aos-fade-right 0.7s ease-out both; }
+.aos-animate[data-aos="zoom-in"]    { animation: aos-zoom-in 0.6s ease-out both; }
+
+/* Hormati preferensi pengguna: matikan animasi scroll */
+@media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+
+/* ============ Landing (welcome) ============ */
+.hero-grid-bg {
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(20, 184, 135, 0.10) 0, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(65, 207, 163, 0.12) 0, transparent 40%),
+        radial-gradient(circle at 70% 85%, rgba(126, 228, 194, 0.10) 0, transparent 45%);
+}
+
+.float-slow { animation: floaty 6s ease-in-out infinite; }
+.float-slower { animation: floaty 8s ease-in-out infinite reverse; }
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.marquee-track { animation: marquee 28s linear infinite; }
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.progress-shine::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: translateX(-100%);
+    animation: shine 2.8s ease-in-out infinite;
+}
+@keyframes shine { 60%, 100% { transform: translateX(100%); } }
+
+/* ============ Auth (login/register) ============ */
+.brand-bg {
+    background-image:
+        radial-gradient(circle at 20% 25%, rgba(126, 228, 194, 0.18) 0, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.08) 0, transparent 40%),
+        radial-gradient(circle at 60% 90%, rgba(65, 207, 163, 0.16) 0, transparent 45%);
+}
+
+/* ============ Dashboard ============ */
+.dash-bg {
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(65, 207, 163, 0.10) 0, transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(126, 228, 194, 0.08) 0, transparent 45%);
+}
