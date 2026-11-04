@@ -61,7 +61,6 @@ resources/views/  # welcome, auth/*, dashboard
 
 ## Dokumentasi
 
-- **`CONTEXT.md`** — konteks lengkap project (struktur, rule bisnis, API, konvensi kode)
 - **`TODO.md`** — progress tracker & rekomendasi prioritas
 
 ## Lisensi
