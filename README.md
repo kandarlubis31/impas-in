@@ -57,11 +57,21 @@ routes/      # web.php + api.php (⚠️ api belum didaftarkan di bootstrap/app.
 resources/views/  # welcome, auth/*, dashboard
 ```
 
-> ⚠️ **Catatan**: `routes/api.php` belum terdaftar di `bootstrap/app.php` — semua endpoint `/api/*` akan 404 sampai ditambahkan `api:` di `withRouting()`.
+> **Catatan**: `routes/api.php` belum terdaftar di `bootstrap/app.php` — semua endpoint `/api/*` akan 404 sampai ditambahkan `api:` di `withRouting()`.
 
 ## Dokumentasi
 
 - **`TODO.md`** — progress tracker & rekomendasi prioritas
+
+---
+
+## English
+
+**IMPAS-IN** is a Laravel web application for bartering help between users, with a point and reputation system. A user publishes a task with a point reward and an effort level from 1 to 5; another user offers help, optionally with conditions and an extra fee, and earns points and reputation once the task is done.
+
+Authentication works through both API tokens (Sanctum) and web sessions.
+
+---
 
 ## Lisensi
 
